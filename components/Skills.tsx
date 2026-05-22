@@ -137,7 +137,7 @@ function TechCard({ tech }: { tech: Tech }) {
       <span
         className="text-xs font-medium text-center leading-tight relative z-10"
         style={{
-          color: hovered ? "#e5e5e5" : "#737373",
+          color: hovered ? (light ? "#0a0a0a" : "#e5e5e5") : "#737373",
           transition: "color 0.25s ease",
         }}
       >
