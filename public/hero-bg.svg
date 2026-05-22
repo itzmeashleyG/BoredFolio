@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  width="2560"
+  height="1440"
+  viewBox="0 0 2560 1440"
+  xmlns="http://www.w3.org/2000/svg"
+  preserveAspectRatio="xMidYMid slice"
+>
+  <defs>
+
+    <!-- Full-canvas filter extents prevent blur clipping at edges -->
+    <filter id="blur-xl" x="-20%" y="-20%" width="140%" height="140%" filterUnits="userSpaceOnUse"
+            x="0" y="0" width="2560" height="1440">
+      <feGaussianBlur stdDeviation="150"/>
+    </filter>
+    <filter id="blur-lg" x="0" y="0" width="2560" height="1440" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="75"/>
+    </filter>
+    <filter id="blur-md" x="0" y="0" width="2560" height="1440" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="32"/>
+    </filter>
+    <filter id="blur-sm" x="0" y="0" width="2560" height="1440" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="2560" height="1440" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency="0.70" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+
+    <!-- Left-side darkness anchor keeps text area pitch black -->
+    <linearGradient id="leftFade" x1="0" y1="0" x2="1300" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#080808" stop-opacity="1"/>
+      <stop offset="40%"  stop-color="#080808" stop-opacity="0.96"/>
+      <stop offset="68%"  stop-color="#080808" stop-opacity="0.55"/>
+      <stop offset="88%"  stop-color="#080808" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Top vignette -->
+    <linearGradient id="topFade" x1="0" y1="0" x2="0" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#080808" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Bottom vignette -->
+    <linearGradient id="bottomFade" x1="0" y1="1120" x2="0" y2="1440" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#080808" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="0.97"/>
+    </linearGradient>
+
+    <!-- Right edge softener -->
+    <linearGradient id="rightFade" x1="2200" y1="0" x2="2560" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#080808" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="0.75"/>
+    </linearGradient>
+
+  </defs>
+
+  <!-- ── Base: deep charcoal-black ── -->
+  <rect width="2560" height="1440" fill="#080808"/>
+
+  <!-- ── Glow system: 5 layered ellipses for realistic studio light falloff ── -->
+
+  <!-- Layer 1 — outermost atmosphere, very wide & very diffuse -->
+  <ellipse
+    cx="1760" cy="665"
+    rx="1060" ry="870"
+    fill="#505050" fill-opacity="0.28"
+    filter="url(#blur-xl)"
+  />
+
+  <!-- Layer 2 — broad mid-ring, gives the halo body -->
+  <ellipse
+    cx="1740" cy="648"
+    rx="660" ry="540"
+    fill="#a8a8a8" fill-opacity="0.24"
+    filter="url(#blur-lg)"
+  />
+
+  <!-- Layer 3 — inner glow, warming the center -->
+  <ellipse
+    cx="1724" cy="632"
+    rx="340" ry="278"
+    fill="#d8d8d8" fill-opacity="0.22"
+    filter="url(#blur-md)"
+  />
+
+  <!-- Layer 4 — bright core, studio key-light feel -->
+  <ellipse
+    cx="1712" cy="620"
+    rx="165" ry="135"
+    fill="#eeeeee" fill-opacity="0.20"
+    filter="url(#blur-md)"
+  />
+
+  <!-- Layer 5 — specular hotspot (tiniest, brightest, sharpest) -->
+  <ellipse
+    cx="1702" cy="610"
+    rx="68" ry="54"
+    fill="#f8f8f8" fill-opacity="0.18"
+    filter="url(#blur-sm)"
+  />
+
+  <!-- ── Edge vignettes: seal the darkness at all borders ── -->
+  <rect x="0"    y="0" width="1300" height="1440" fill="url(#leftFade)"/>
+  <rect x="0"    y="0" width="2560" height="320"  fill="url(#topFade)"/>
+  <rect x="0" y="1120" width="2560" height="320"  fill="url(#bottomFade)"/>
+  <rect x="2200" y="0" width="360"  height="1440" fill="url(#rightFade)"/>
+
+  <!-- ── Film grain: ultra-subtle premium texture ── -->
+  <rect width="2560" height="1440" filter="url(#grain)" opacity="0.036"/>
+
+</svg>

@@ -1,26 +1,231 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background-color: #0a0a0a;
+  overflow-x: hidden;
+}
+
+html.light {
+  background-color: #f4f4f5;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Safe-area padding for notched phones */
+  padding-left:  env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+@keyframes shimmer-slide {
+  0%   { transform: translateX(-100%) skewX(-20deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateX(300%) skewX(-20deg); opacity: 0; }
+}
+
+@keyframes float-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.06); }
+}
+
+/* ── Hero entrance ── */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(32px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0px); }
+}
+
+@keyframes hero-photo-in {
+  from { opacity: 0; transform: scale(0.88) translateY(28px); filter: blur(18px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    filter: blur(0px);  }
+}
+
+/* ── Photo card floating ── */
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-11px); }
+}
+
+/* ── Animated border on photo ── */
+@keyframes photo-border-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Camera shutter flash ── */
+@keyframes photo-shutter {
+  0%   { opacity: 0.55; }
+  40%  { opacity: 0.2;  }
+  100% { opacity: 0;    }
+}
+
+/* ── Shimmer sweep on border ── */
+@keyframes border-shimmer-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes ring-breathe {
+  0%, 100% { opacity: 1;    transform: scale(1); }
+  50%       { opacity: 0.65; transform: scale(1.018); }
+}
+
+@keyframes horizon-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 1; }
+}
+
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate(0px,   0px) scale(1); }
+  20%       { transform: translate(-80px, -60px) scale(1.08); }
+  40%       { transform: translate(60px,  -100px) scale(0.94); }
+  60%       { transform: translate(110px, 50px) scale(1.12); }
+  80%       { transform: translate(-45px, 85px) scale(0.97); }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate(0px,   0px) scale(1); }
+  25%       { transform: translate(100px, 70px) scale(1.1); }
+  50%       { transform: translate(50px,  130px) scale(0.92); }
+  75%       { transform: translate(-85px, 45px) scale(1.06); }
+}
+
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate(0px,  0px) scale(1); }
+  30%       { transform: translate(90px, -70px) scale(1.08); }
+  60%       { transform: translate(50px, 110px) scale(0.93); }
+  90%       { transform: translate(-65px,-45px) scale(1.05); }
+}
+
+@keyframes orb-float-4 {
+  0%, 100% { transform: translate(0px,   0px) scale(1); }
+  35%       { transform: translate(-95px,-55px) scale(1.1); }
+  70%       { transform: translate(55px,  90px) scale(0.95); }
+}
+
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  25%       { transform: translate(90px, -70px) scale(1.12); }
+  50%       { transform: translate(-40px, 90px) scale(0.91); }
+  75%       { transform: translate(-80px, -35px) scale(1.06); }
+}
+
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(-90px, 60px) scale(1.09); }
+  66%       { transform: translate(70px, -80px) scale(0.93); }
+}
+
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50%       { transform: translate(70px, 50px) scale(1.07); }
+}
+
+@keyframes blob-drift-4 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  40%       { transform: translate(50px, -80px) scale(1.1); }
+  80%       { transform: translate(-60px, 40px) scale(0.94); }
+}
+
+@keyframes aurora-line {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1; }
+}
+
+@keyframes bokeh-float {
+  0%, 100% { transform: translateY(0px) scale(1);   opacity: 0.6; }
+  33%       { transform: translateY(-14px) scale(1.1); opacity: 1;   }
+  66%       { transform: translateY(8px) scale(0.92); opacity: 0.4; }
+}
+
+@keyframes border-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes dash-march {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -20; }
+}
+
+/* ── Scroll reveal — spring bounce + blur + scale ── */
+.slide-hidden {
+  opacity: 0;
+  transform: translateY(32px);
+  filter: blur(3px);
+  transition:
+    opacity  0.7s ease,
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    filter   0.5s ease;
+}
+
+.slide-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ── Word reveal ── */
+@keyframes word-up {
+  from { transform: translateY(108%); }
+  to   { transform: translateY(0); }
+}
+
+/* ── Stagger entry for cards / timeline items ── */
+@keyframes stagger-in {
+  from { opacity: 0; transform: translateY(22px); filter: blur(2px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* ── Image banner mask wipe ── */
+@keyframes banner-wipe {
+  from { transform: translateY(104%); }
+  to   { transform: translateY(0); }
+}
+
+/* Pre-animation hidden states — animation fill-mode overrides these */
+[data-card]  { opacity: 0; }
+[data-entry] { opacity: 0; }
+[data-cert]  { opacity: 0; }
+[data-tech]  { opacity: 0; }
+
+/* ── Accessibility: skip all motion for users who prefer it ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-card], [data-entry], [data-cert], [data-tech] { opacity: 1 !important; }
+  .slide-hidden { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+
