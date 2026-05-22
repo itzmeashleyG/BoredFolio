@@ -43,3 +43,5 @@ next-env.d.ts
 # cursor / ai config
 .agents/
 .claude/
+skills-lock.json
+
